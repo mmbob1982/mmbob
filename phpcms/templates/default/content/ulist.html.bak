@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+<link rel="stylesheet" type="text/css" href="{CSS_PATH}css/import.css" />
+<script type="text/javascript" src="{JS_PATH}js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="{JS_PATH}js/index.js"></script>
+</head>
+<body>
+<!--▼wrapper▼-->
+<div id="wrapper">
+  <!--▼header▼-->
+  <div id="header" class="clearfix">
+    <h1 id="logo">标题在这里</h1>
+    <!-- /header -->
+  </div>
+  <!--▼content▼-->
+  <div id="content" class="clearfix">
+    <div id="leftColumn">
+      <h3 class="ttl">这里是分类</h3>
+      <ul class="list_school">
+	  {pc:get sql="select * from v9_category where module='yp' order by listorder asc" cache="3600" return="data"}
+	  <li><a href="index.php?m=content&c=index&a=ulist&sname={$v['catname']}">全部</a></li>
+	  {loop $data $key $v}
+        <li><a href="index.php?m=content&c=index&a=ulist&sname={$v['catname']}">{$v['catname']}</a></li>
+      {/loop}
+	  {/pc}
+      </ul>
+      <span class="line"></span> </div>
+    <div id="rightColumn">
+      <ul class="list_headers">
+		{pc:get sql="select * from v9_yp_company $con order by userid desc" num="81"  return="datas"}
+	    
+		{loop $datas $key $v}
+        <li>
+          <div class="s-pic"> <a href="{$v['url']}" target="_blank"><img src="{$v['user_logo']}" alt="{$v['companyname']}" width="80" height="80"/></a> </div>
+          <div class="intro">
+            <h3><a href="{$v['url']}" target="_blank">{$v['companyname']}</a></h3>
+            <p class="txt">{$v['jianjie']}</p>
+            <a class="pic" href="{$v['url']}" target="_blank"><img src="{$v['user_logo']}" width="150" height="150" alt="{$v['companyname']}" /></a> </div>
+        </li>
+       {/loop}
+	   {/pc}
+      </ul>
+    </div>
+    <!-- /content -->
+  </div>
+  <!--▼footer▼-->
+  <div id="footer" class="clearfix">
+    <div class="copyright">
+      <p><a href="#">关于我们</a> | <a href="#">联系我们</a> | <a href="#">网站地图</a> | <a href="#">隐私保护</a></p>
+      <p>国家信息产业部备案 <a class="tip" href="http://www.miibeian.gov.cn" target="_blank">鲁ICP备05047375</a> 【济南市公安局网警支队备案：37010009000020】 </p>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /wrapper -->
+</div>
+<script type="text/javascript">
+  function foldPan(obj){
+	  var str=$(obj).parent().attr('class');
+	   if(str.indexOf('close')>=0){
+		  $('#pan_01').css('display','block');		   
+		   $('#pan_02').css('display','block');
+		     $(obj).parent().removeClass('close')
+		   $(obj).parent().addClass('open');
+		   }else{
+			$('#pan_01').css('display','none');		   
+		   $('#pan_02').css('display','none');
+		     $(obj).parent().removeClass('open')
+		   $(obj).parent().addClass('close');
+		      
+			   }
+	  }
+</script>
+<script type="text/javascript">
+$(function(){
+		   
+$('.list_headers li').hover(function(){
+    				$(this).css('z-index','10000')
+					$(this).find('.intro').css('display','block')				  
+								  },function(){
+					$(this).css('z-index','')
+    				$(this).find('.intro').css('display','none')				  
+									  });
+		   })
+</script>
+</body>
+</html>

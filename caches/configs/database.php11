@@ -1,0 +1,18 @@
+<?php
+
+return array (
+	'default' => array (
+		'hostname' => 'localhost',
+		'database' => 'db2105260-main',
+		'username' => 'user2105260',
+		'password' => '1qaz2wsx',
+		'tablepre' => 'v9_',
+		'charset' => 'utf8',
+		'type' => 'mysql',
+		'debug' => true,
+		'pconnect' => 0,
+		'autoconnect' => 0
+		),
+);
+
+?>
